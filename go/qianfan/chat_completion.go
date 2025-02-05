@@ -144,7 +144,7 @@ var ChatModelEndpoint = map[string]string{
 	"Gemma-7B-it":                   "/chat/gemma_7b_it",
 	"Qianfan-Dynamic-8K":            "/chat/qianfan-dynamic-8k",
 	"DeepSeek-V3":                   "/chat/deepseek-v3",
-	"DeepSeek-R1":                   "/chat/deepseek-r1"
+	"DeepSeek-R1":                   "/chat/deepseek-r1",
 }
 
 // inputLimitInfo 结构体包含 maxInputChars 和 maxInputTokens
