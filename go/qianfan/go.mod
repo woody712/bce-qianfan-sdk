@@ -1,4 +1,4 @@
-module github.com/baidubce/bce-qianfan-sdk/go/qianfan
+module github.com/woody712/bce-qianfan-sdk/go/qianfan
 
 go 1.18
 
