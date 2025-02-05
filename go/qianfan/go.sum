@@ -1,5 +1,5 @@
-github.com/baidubce/bce-sdk-go v0.9.164 h1:7gswLMsdQyarovMKuv3i6wxFQ3BQgvc5CmyGXb/D/xA=
-github.com/baidubce/bce-sdk-go v0.9.164/go.mod h1:zbYJMQwE4IZuyrJiFO8tO8NbtYiKTFTbwh4eIsqjVdg=
+github.com/woody712/bce-sdk-go v0.9.164 h1:7gswLMsdQyarovMKuv3i6wxFQ3BQgvc5CmyGXb/D/xA=
+github.com/woody712/bce-sdk-go v0.9.164/go.mod h1:zbYJMQwE4IZuyrJiFO8tO8NbtYiKTFTbwh4eIsqjVdg=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
