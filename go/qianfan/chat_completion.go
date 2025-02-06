@@ -143,8 +143,6 @@ var ChatModelEndpoint = map[string]string{
 	"Mixtral-8x7B-Instruct":         "/chat/mixtral_8x7b_instruct",
 	"Gemma-7B-it":                   "/chat/gemma_7b_it",
 	"Qianfan-Dynamic-8K":            "/chat/qianfan-dynamic-8k",
-	"DeepSeek-V3":                   "/chat/deepseek-v3",
-	"DeepSeek-R1":                   "/chat/deepseek-r1",
 }
 
 // inputLimitInfo 结构体包含 maxInputChars 和 maxInputTokens
@@ -210,8 +208,6 @@ var limitMapInModelName = map[string]inputLimitInfo{
 	"ERNIE-Speed-Pro-128K":          {MaxInputChars: 516096, MaxInputTokens: 126976},
 	"ERNIE-Novel-8K":                {MaxInputChars: 24000, MaxInputTokens: 6144},
 	"Qianfan-Dynamic-8K":            {MaxInputChars: 20000, MaxInputTokens: 5120},
-	"DeepSeek-V3":                   {MaxInputChars: 20000, MaxInputTokens: 8192},
-	"DeepSeek-R1":                   {MaxInputChars: 20000, MaxInputTokens: 8192},
 }
 
 var limitMapInEndpoint = map[string]inputLimitInfo{
@@ -268,8 +264,6 @@ var limitMapInEndpoint = map[string]inputLimitInfo{
 	"/chat/ernie-speed-pro-128k":         {MaxInputChars: 516096, MaxInputTokens: 126976},
 	"/chat/ernie-novel-8k":               {MaxInputChars: 24000, MaxInputTokens: 6144},
 	"/chat/qianfan_dynamic_8k":           {MaxInputChars: 20000, MaxInputTokens: 5120},
-	"/chat/deepseek-v3":                  {MaxInputChars: 20000, MaxInputTokens: 8192},
-	"/chat/deepseek-r1":                  {MaxInputChars: 20000, MaxInputTokens: 8192},
 }
 
 // 创建一个 User 的消息

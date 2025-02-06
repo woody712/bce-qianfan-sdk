@@ -17,6 +17,7 @@ package qianfan
 import (
 	"context"
 	"fmt"
+	"strings"
 )
 
 // 用于 chat v2 类型模型的结构体
@@ -131,6 +132,10 @@ func newChatCompletionV2(options *Options) *ChatCompletionV2 {
 	return chat
 }
 
+func transferModel(model string) string {
+	return strings.ToLower(strings.ReplaceAll(model, " ", "-"))
+}
+
 // 发送 chat 请求
 func (c *ChatCompletionV2) Do(ctx context.Context, request *ChatCompletionV2Request) (*ChatCompletionV2Response, error) {
 	var resp *ChatCompletionV2Response
@@ -146,9 +151,8 @@ func (c *ChatCompletionV2) Do(ctx context.Context, request *ChatCompletionV2Requ
 
 func (c *ChatCompletionV2) do(ctx context.Context, request *ChatCompletionV2Request) (*ChatCompletionV2Response, error) {
 	do := func() (*ChatCompletionV2Response, error) {
-
+		request.Model = transferModel(request.Model)
 		url := "/v2/chat/completions"
-
 		req, err := NewBearerTokenRequest("POST", url, request)
 		if err != nil {
 			return nil, err
@@ -204,6 +208,7 @@ func (c *ChatCompletionV2) stream(ctx context.Context, request *ChatCompletionV2
 		url := "/v2/chat/completions"
 
 		request.SetStream()
+		request.Model = transferModel(request.Model)
 		req, err := NewBearerTokenRequest("POST", url, request)
 		if err != nil {
 			return nil, err
