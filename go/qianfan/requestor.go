@@ -90,6 +90,7 @@ const (
 
 // SDK 内部表示请求的类
 type QfRequest struct {
+	Version int                    // 请求版本
 	Type    string                 // 请求类型，用于区分是模型的请求 `modelRequest` 还是管控类请求 `consoleRequest`
 	Method  string                 // HTTP 方法
 	URL     string                 // 请求的完整地址
@@ -213,13 +214,16 @@ func (r *Requestor) addAuthInfo(ctx context.Context, request *QfRequest) error {
 			return err
 		}
 		request.Headers["Authorization"] = fmt.Sprintf("Bearer %s", token)
+		if request.Version == 2 && r.Options.AppId != nil {
+			request.Headers["appid"] = *r.Options.AppId
+		}
 		return nil
 	}
 	if GetConfig().AK != "" && GetConfig().SK != "" {
-		return r.addAccessToken(ctx, request)
-	} else if GetConfig().AccessKey != "" && GetConfig().SecretKey != "" {
 		return r.sign(request)
-	} else if GetConfig().AccessToken != "" {
+	} else if request.Version == 1 && GetConfig().AccessKey != "" && GetConfig().SecretKey != "" {
+		return r.addAccessToken(ctx, request)
+	} else if request.Version == 1 && GetConfig().AccessToken != "" {
 		request.Params["access_token"] = GetConfig().AccessToken
 		return nil
 	}
@@ -229,7 +233,7 @@ func (r *Requestor) addAuthInfo(ctx context.Context, request *QfRequest) error {
 
 // 增加 accesstoken 鉴权信息
 func (r *Requestor) addAccessToken(ctx context.Context, request *QfRequest) error {
-	token, err := GetAuthManager().GetAccessToken(ctx, GetConfig().AK, GetConfig().SK)
+	token, err := GetAuthManager().GetAccessToken(ctx, GetConfig().AccessKey, GetConfig().SecretKey)
 	if err != nil {
 		return err
 	}
@@ -277,7 +281,7 @@ func (r *Requestor) sign(request *QfRequest) error {
 	}
 	now := util.NowUTCSeconds()
 	bceRequest.SetHeader("Host", u.Hostname())
-	bceRequest.SetHeader("x-bce-date", util.FormatISO8601Date(now))
+	// bceRequest.SetHeader("x-bce-date", util.FormatISO8601Date(now))
 	headersToSign := make(map[string]struct{})
 	for k := range bceRequest.Headers() {
 		headersToSign[strings.ToLower(k)] = struct{}{}
@@ -331,6 +335,9 @@ func (r *Requestor) prepareRequest(ctx context.Context, request QfRequest) (*htt
 		return nil, err
 	}
 	for k, v := range request.Headers {
+		if request.Version == 2 && k == "Authorization" && !strings.Contains(v, "Bearer") {
+			v = "Bearer " + v
+		}
 		req.Header.Set(k, v)
 	}
 

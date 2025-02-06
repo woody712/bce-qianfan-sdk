@@ -360,6 +360,7 @@ func (c *ChatCompletion) do(ctx context.Context, request *ChatCompletionRequest)
 		if err != nil {
 			return nil, err
 		}
+		req.Version = 1
 		var resp ModelResponse
 
 		err = c.requestResource(ctx, req, &resp)
@@ -412,6 +413,7 @@ func (c *ChatCompletion) stream(ctx context.Context, request *ChatCompletionRequ
 		if err != nil {
 			return nil, err
 		}
+		req.Version = 1
 		stream, err := c.Requestor.requestStream(ctx, req)
 		if err != nil {
 			return nil, err

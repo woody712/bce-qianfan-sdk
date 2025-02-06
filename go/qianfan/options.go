@@ -24,6 +24,7 @@ type Options struct {
 	LLMRetryTimeout       float32
 	LLMRetryBackoffFactor float32
 	Context               context.Context
+	AppId                 *string
 }
 
 // 用于模型类对象设置使用的模型
@@ -67,6 +68,13 @@ func WithContext(ctx context.Context) Option {
 		options.Context = ctx
 	}
 }
+
+func WithAppId(appId string) Option {
+	return func(options *Options) {
+		options.AppId = &appId
+	}
+}
+
 
 // 将多个 Option 转换成最终的 Options 对象
 func makeOptions(options ...Option) *Options {

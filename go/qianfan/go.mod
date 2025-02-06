@@ -3,7 +3,7 @@ module github.com/woody712/bce-qianfan-sdk/go/qianfan
 go 1.18
 
 require (
-	github.com/baidubce/bce-sdk-go v0.9.164
+	github.com/baidubce/bce-sdk-go v0.9.215
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/viper v1.18.2

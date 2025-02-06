@@ -132,6 +132,7 @@ func (m *AuthManager) GetAccessTokenWithRefresh(ctx context.Context, ak, sk stri
 	if err != nil {
 		return "", err
 	}
+	logger.Infof("paramsMap: %v", paramsMap)
 	req.Params = paramsMap
 	err = m.Requestor.request(ctx, req, &resp)
 	if err != nil {
@@ -214,12 +215,13 @@ func (m *BearerTokenManager) GetAccessTokenWithRefresh() (string, error) {
 	}
 
 	resp := IAMBearerTokenResponse{}
+	refreshPath := "/v1/BCE-BEARER/token"
+	if GetConfig().BearerTokenExpirationSeconds > 0 {
+		refreshPath += fmt.Sprintf("?expireInSeconds=%d", GetConfig().BearerTokenExpirationSeconds)
+	}
 	req, err := NewIAMBearerTokenRequest(
 		"GET",
-		fmt.Sprintf(
-			"/v1/BCE-BEARER/token?expireInSeconds=%d",
-			GetConfig().BearerTokenExpirationSeconds,
-		),
+		refreshPath,
 		nil,
 	)
 	if err != nil {

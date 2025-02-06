@@ -44,6 +44,7 @@ var defaultConfig = map[string]string{
 type Config struct {
 	AK                            string  `mapstructure:"QIANFAN_AK"`
 	SK                            string  `mapstructure:"QIANFAN_SK"`
+	ApiKey                        string  `mapstructure:"QIANFAN_API_KEY"`
 	AccessKey                     string  `mapstructure:"QIANFAN_ACCESS_KEY"`
 	SecretKey                     string  `mapstructure:"QIANFAN_SECRET_KEY"`
 	AccessToken                   string  `mapstructure:"QIANFAN_ACCESS_TOKEN"`

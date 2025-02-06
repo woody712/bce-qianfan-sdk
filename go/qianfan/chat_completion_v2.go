@@ -154,7 +154,7 @@ func (c *ChatCompletionV2) do(ctx context.Context, request *ChatCompletionV2Requ
 			return nil, err
 		}
 		var resp ChatCompletionV2Response
-
+		req.Version = 2
 		err = c.Requestor.request(ctx, req, &resp)
 
 		if err != nil {
@@ -208,6 +208,7 @@ func (c *ChatCompletionV2) stream(ctx context.Context, request *ChatCompletionV2
 		if err != nil {
 			return nil, err
 		}
+		req.Version = 2
 		stream, err := c.Requestor.requestStream(ctx, req)
 		if err != nil {
 			return nil, err
