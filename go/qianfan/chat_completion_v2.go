@@ -75,8 +75,8 @@ type ChatCompletionV2Message struct {
 }
 
 type ChatCompletionV2Delta struct {
-	Content   string     `mapstructure:"content"`              // 生成结果
-	ToolCalls []ToolCall `mapstructure:"tool_calls,omitempty"` // 函数调用
+	Content   string     `mapstructure:"content" json:"content,omitempty"`              // 生成结果
+	ToolCalls []ToolCall `mapstructure:"tool_calls,omitempty" json:"tool_calls,omitempty"` // 函数调用
 }
 
 type StreamOptions struct {
